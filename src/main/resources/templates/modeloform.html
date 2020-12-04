@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layouts/base-layout :: head"></head>
+<body>
+
+	<div class="container mt-5">
+		<div class="row justify-content-center">
+			<div class="col-md-8">
+				<h4 class="">Buscar coches por modelo</h4>
+
+				<form action="#" th:action="@{/modelo}" th:object="${coche}" method="post">
+					<input type="text" th:field="*{modelo}" class="form-control col-md-4" />
+					<button type="submit" class="btn btn-success mt-4 mb-4">Buscar</button>
+				</form>
+				
+				<table class="table">
+					<thead>
+						<tr>
+							<th>Marca</th>
+							<th>Modelo</th>
+							<th>Velocidad</th>
+							<th>Potencia</th>
+							<th>Precio</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="coche : ${coches}">
+							<td th:text="${coche.marca}"></td>
+							<td th:text="${coche.modelo}"></td>
+							<td th:text="${coche.velocidad}+'Km/h'"></td>
+							<td th:text="${coche.potencia}+'C.V'"></td>
+							<td th:text="${#numbers.formatDecimal(coche.precio, 0, 3, 'POINT')} + '$'"></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>
